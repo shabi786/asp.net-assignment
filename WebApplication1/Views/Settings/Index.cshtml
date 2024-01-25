@@ -1,0 +1,41 @@
+﻿<!-- Views/Settings/Index.cshtml -->
+@model List<Setting>
+
+<h2>Settings</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var setting in Model)
+        {
+            <tr>
+                <td>@setting.Key</td>
+                <td>@setting.Value</td>
+                <td>@setting.Description</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@setting.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@setting.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@setting.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Your button to open the Create modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">Create Setting</button>
+
+<!-- Include the _Create and _Edit modals -->
+@{
+    await Html.RenderPartialAsync("_Create");
+}
+@{
+    await Html.RenderPartialAsync("_Edit");
+}
